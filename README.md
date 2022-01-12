@@ -20,16 +20,15 @@ npm run start
 ## INITIALIZE
 
 ```
-    let options = {
-		basesPerLine: 60,
-		onChange: function(status) {
-			//console.log(status);
-		}
+const options = {
+    basesPerLine: 60,
+	onChange: function(status) {
+	    //console.log(status);
 	}
+}
 
-	editorInstance = new GeneEditor.GeneEditor("editor", options);
+const editorInstance = new GeneEditor.GeneEditor("editor", options);
 
-	editorInstance.LoadFromString("TGCACATGCA");
-	
+editorInstance.LoadFromString("TGCACATGCA");
 ```
 
