@@ -1,0 +1,11 @@
+* {
+	margin: 0px;
+	padding:0px;
+	outline: none;
+}
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
+}
+
+

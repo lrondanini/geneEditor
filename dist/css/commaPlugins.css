@@ -1,0 +1,783 @@
+
+.commaTable {
+	overflow: auto;
+	border-collapse: collapse;	
+	table-layout: fixed;
+	width:auto;
+}
+
+.commaTableCell {
+	border:1px solid #e3e3e3;
+
+	padding:4px;
+	min-width: 40px;
+	min-height: 40px;
+	box-sizing: border-box; /* crucial for JS resizing calculations! */
+}
+
+.commaTableCellSelected {
+	/* border:1px solid ; */
+	padding:4px;
+	min-width: 40px;
+	min-height: 40px;
+	box-sizing: border-box; /* crucial for JS resizing calculations! */
+
+	border-top-color: #30b7e8 !important;
+    border-top-style: double !important;
+    border-top-width: 1px !important;
+    border-right-color: #30b7e8 !important;
+    border-right-style: double !important;
+    border-right-width: 1px !important;
+    border-bottom-color: #30b7e8 !important;
+    border-bottom-style: double !important;
+    border-bottom-width: 1px !important;
+    border-left-color: #30b7e8 !important;
+    border-left-style: double !important;
+    border-left-width: 1px !important;
+    border-image-source: initial !important;
+    border-image-slice: initial !important;
+    border-image-width: initial !important;
+    border-image-outset: initial !important;
+    border-image-repeat: initial !important;
+
+}
+
+/* TASKS */
+.commaTaskUnchecked {
+    margin: 0px 8px 4px 8px;
+    width:12px;
+    color: #7c868f;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* MULTICOLUMN */
+/* its a 2 columns 2 cells table */
+.commaColumnsContainer {
+    overflow: auto;
+    border-collapse: collapse;  
+    table-layout: fixed;
+    width: 100%;
+}
+
+.commaColumnsContainer tr td {
+    border: 1px solid rgba(222, 222, 222,0);
+}
+
+
+.commaColumnsContainer:hover tr td {
+    border: 1px solid rgba(222, 222, 222,1);
+}
+
+.commaParagraphColumn {
+    vertical-align: top;    
+    width: 50%;
+}
+
+/******* IMAGES ******/
+
+.commaImg {
+    cursor: pointer;
+    height:auto;
+    width: 300px;
+    /* border: 1px solid rgba(255,255,255,0); */
+}
+
+.commaVideo {
+    height:auto;
+    width: 300px;
+    /* border: 1px solid rgba(255,255,255,0); */
+}
+
+
+/* resize panel */
+
+.comma-img-resizable {
+    background: rgba(48, 183, 232,0);
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    display: none;
+    z-index: 9999999;
+}
+
+.comma-img-resizable .comma-img-resizers {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #FF9100;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(48, 183, 232,0);
+}
+
+.comma-img-resizable .comma-img-resizers  .comma-img-resizer {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #FF9100;
+    border: 1px solid #FF9100;
+    position: absolute;
+}
+
+.comma-img-resizable .comma-img-resizers  .comma-img-resizer.cir-top-left {
+    left: -4px;
+    top: -4px;
+    cursor: nwse-resize;
+    z-index: 99999;
+}
+
+.comma-img-resizable .comma-img-resizers  .comma-img-resizer.cir-top-right {
+    right: -4px;
+    top: -4px;
+    cursor: nesw-resize;
+    z-index: 99999;
+}
+
+.comma-img-resizable .comma-img-resizers  .comma-img-resizer.cir-bottom-left {
+    left: -4px;
+    bottom: -4px;
+    cursor: nesw-resize;
+    z-index: 99999;
+}
+
+.comma-img-resizable .comma-img-resizers  .comma-img-resizer.cir-bottom-right {
+    right: -4px;
+    bottom: -4px;
+    cursor: nwse-resize;
+    z-index: 99999;
+}
+
+    
+/* used to draw opaque rectangle around cropping rectangle*/
+.cir-opaque-panel {
+    position: fixed;
+    background-color: #21252b;
+    opacity: 0.7;
+    z-index: 1;
+}
+
+
+.comma-image-edit-btn {
+    font-size:28px;
+    color: #FF9100;
+}
+
+.comma-image-edit-btn:hover {
+    cursor: pointer;
+    color: rgba(48, 183, 232, 1);
+}
+
+
+/******** IMAGES editor  ********/
+
+.comma-img-editor {
+    width: 100%;
+    height: 100%;
+    background: #2b3038;
+    position:fixed;
+    left: 0px;
+    top:  0px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    z-index: 99999;
+}
+
+.ciec-close-btn {
+    top:  10px;
+    right: 20px;
+    position:fixed;
+    color: #9298a1;
+    cursor: pointer;
+    font-size:32px;
+}
+
+.ciec-close-btn:hover {
+    color: #bcc0c4;
+}
+
+
+.comma-img-editor-container {
+    width: 100%;
+    height: 100%;
+    min-width: 1000px;
+    min-height: 600px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.cie-pnl-preview {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    padding: 3vh 3vw 3vh 3vw;
+}
+
+.cie-canvas-wrapper {
+    display: block;
+    max-height: 80vh;
+    max-width: 80vw;
+    overflow: hidden;
+}
+
+
+/* TOOL OPTIONS PNL */
+
+.cie-pnl-tool-option {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    display: none;
+}
+
+.cie-pnl-tool-option-btn {
+    margin: 10px 10px 20px 10px;
+    padding:10px;
+    color: #9298a1;
+    font-size: 14px;
+    font-family: Arial;
+}
+
+.cie-pnl-tool-option-btn:hover {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.cie-pnl-tool-option-btn-divider {
+    margin: 20px 10px 30px 10px;
+    background-color: #9298a1;
+    width: 1px;
+    height: 28px;
+}
+
+/* MENU */
+
+.cie-pnl-menu {
+    height: 80px;
+    width: 100%;
+    background-color: #21252b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cie-pnl-menu-btn {
+    color: #9298a1;
+    font-size:26px;
+    border-radius: 4px;
+    height: 33px;
+    width: 33px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right:20px;
+}
+
+.cie-pnl-menu-btn:hover {
+    color: #bcc0c4;
+}
+
+.cie-pnl-menu-btn.cie-pnl-menu-btn-selected {
+    background-color: #ffffff;
+    color: #21252b;
+}
+
+.cie-pnl-menu-divider {
+    width:1px;
+    height: 26px;
+    background-color: #343a42;
+    margin:0px 20px 0px 0px;
+}
+
+.cie-pnl-menu-details {
+    
+}
+
+.cie-pnl-menu-btn-save {
+    background-color: rgba(48, 183, 232, 1);
+    font-size: 16px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right:20px;
+    padding: 6px 20px 6px 20px;
+    color: #21252b;
+}
+
+.cie-pnl-menu-btn-save:hover {
+    background-color: #FF9100;
+
+}
+
+
+/* filters panels */
+
+.cie-pnl-filters-param-container {
+    margin: 0px 0px 6px 0px;
+}
+
+
+.cie-pnl-filters-label {
+    color: #9298a1;
+    width: 90px;
+    text-align: right;
+    padding-right:10px;
+    display: inline-block;
+    font-size:16px;
+}
+
+.cie-pnl-input-range {
+    padding:0px;
+    margin: 0px;
+}
+
+.cie-pnl-filters-erase-btn {
+    font-size: 14px;
+    cursor: pointer;
+    color: #9298a1;
+    margin-left:10px;
+}
+
+.cie-pnl-filters-erase-btn:hover {
+    color: #ffffff;
+}
+
+/* END IMAGES EDITOR */
+
+/* END IMAGES MANAGEMENT (in editor!) */
+
+/* SPREADSHEET */
+
+.spreadsheetContainer {
+    background-color: #f0f0f0; /* #e6e8eb; */
+    overflow: auto;
+    position: relative;
+    padding: 0px 0px 20px 0px;
+    border-radius: 6px;
+}
+
+.functContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #848f96; /* 41505A; */
+    color:#ffffff;
+    overflow: hidden;
+    padding:2px 2px 2px 4px;
+    position: sticky;
+    position: -webkit-sticky; 
+    left: 0px;
+}
+
+.functBoxFxLabel {
+    padding:2px 5px 4px 4px;
+    font-size:12px;
+    font-style:italic;
+    cursor: pointer;
+}
+
+.functInputBox {
+    border: 1px solid #848f96;
+    border-radius: 3px;
+    padding:6px;
+    font-size:12px;
+    font-style: Georgia, serif;
+    color: #475666;
+    display:block;
+    flex:1;
+}
+
+.functionWithErrors {
+     border: 1px solid red;
+}
+
+.cscfe_functBtn {
+    margin:0px 4px 0px 4px;
+    color:#ffffff;
+    cursor: pointer;
+}
+
+.cscfe_functBtn:hover {
+    color:#FFC15E;
+}
+
+
+.commaSpreadsheetTable {
+    border-collapse: collapse;  
+    table-layout: fixed;
+    background-color: #ffffff;
+    width: auto;
+}
+
+.commaSpreadsheetTable thead {
+}   
+
+.commaSpreadsheetTable tbody {
+    
+}
+
+
+
+.commaSpreadsheetCell {
+    border:1px solid #e3e3e3;
+    padding:2px;
+    box-sizing: border-box; /* crucial for JS resizing calculations! */
+    min-width: 60px;
+}
+
+/* row number | col mumber */
+.commaSpreadsheetCellCounter {   
+    border:1px solid #e3e3e3;
+    padding:4px;
+    box-sizing: border-box;
+    background-color: #d6d6d6;
+    color: #7b8187; /* #475666; */
+    font-size:10px;
+    text-align: center;
+    font-weight: bold;
+    font-family: Helvetica;
+    min-width: 30px;
+    cursor: s-resize !important;
+}
+
+.csRowCounterCell {
+    position: sticky;
+    position: -webkit-sticky; 
+    left: 0px;
+    cursor: e-resize !important;
+}
+
+.commaSpreadsheetCellSelected {
+    /* border:1px solid ; */
+    padding:2px;
+    min-width: 60px;
+    box-sizing: border-box; /* crucial for JS resizing calculations! */
+    background-color: rgba(48, 183, 232, 0.1); /* = #30b7e8  */
+    border-top-color: #30b7e8 !important;
+    border-top-style: double !important;
+    border-top-width: 1px !important;
+    border-right-color: #30b7e8 !important;
+    border-right-style: double !important;
+    border-right-width: 1px !important;
+    border-bottom-color: #30b7e8 !important;
+    border-bottom-style: double !important;
+    border-bottom-width: 1px !important;
+    border-left-color: #30b7e8 !important;
+    border-left-style: double !important;
+    border-left-width: 1px !important;
+    border-image-source: initial !important;
+    border-image-slice: initial !important;
+    border-image-width: initial !important;
+    border-image-outset: initial !important;
+    border-image-repeat: initial !important;
+
+}
+
+/* different colors for autofill */
+.commaSpreadsheetCellAutofillSelected {
+    padding:2px;
+    min-width: 60px;
+    box-sizing: border-box; /* crucial for JS resizing calculations! */
+    background-color: rgba(255, 145, 0, 0.1); /* = #FF9100  */
+    border-top-color: #FF9100 !important;
+    border-top-style: double !important;
+    border-top-width: 1px !important;
+    border-right-color: #FF9100 !important;
+    border-right-style: double !important;
+    border-right-width: 1px !important;
+    border-bottom-color: #FF9100 !important;
+    border-bottom-style: double !important;
+    border-bottom-width: 1px !important;
+    border-left-color: #FF9100 !important;
+    border-left-style: double !important;
+    border-left-width: 1px !important;
+    border-image-source: initial !important;
+    border-image-slice: initial !important;
+    border-image-width: initial !important;
+    border-image-outset: initial !important;
+    border-image-repeat: initial !important;
+}
+
+/* colors for highlight cells for function editig */
+.cscfe_highlight_cell_one {
+    padding:2px;
+    min-width: 60px;
+    box-sizing: border-box; /* crucial for JS resizing calculations! */
+    background-color: rgba(67, 153, 84, 0.1);  
+    border:1px double #439954 !important;
+}
+
+.cscfe_highlight_cell_two {
+    padding:2px;
+    min-width: 60px;
+    box-sizing: border-box; /* crucial for JS resizing calculations! */
+    background-color: rgba(222, 156, 155, 0.1);  
+    border:1px double #de9c9b !important;
+}
+
+.cscfe_highlight_cell_three {
+    padding:2px;
+    min-width: 60px;
+    box-sizing: border-box; /* crucial for JS resizing calculations! */
+    background-color: rgba(230, 136, 60, 0.1);  
+    border:1px double #e6883c !important;
+}
+
+
+.cscfe_highlight_cell_four {
+    padding:2px;
+    min-width: 60px;
+    box-sizing: border-box; /* crucial for JS resizing calculations! */
+    background-color: rgba(60, 139, 230, 0.1);  
+    border:1px double #3c8be6 !important;
+}
+
+.cscfe_highlight_cell_five {
+    padding:2px;
+    min-width: 60px;
+    box-sizing: border-box; /* crucial for JS resizing calculations! */
+    background-color: rgba(196, 60, 230, 0.1); 
+    border:1px double #c43ce6 !important;
+}
+
+.cscfe_highlight_cell_six {
+    padding:2px;
+    min-width: 60px;
+    box-sizing: border-box; /* crucial for JS resizing calculations! */
+    background-color: rgba(249, 217, 120, 0.1); 
+    border:1px double #f9d978 !important;
+}
+
+
+/* end highlight cells*/
+
+
+.csTableAutofillHandle {
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;    
+    background-color: #00bbff;
+    z-index: 99;
+    position: absolute;
+    cursor: crosshair;
+}
+
+
+/* info panel */
+
+.cscfe_info_pnl_container {    
+    position: absolute;
+    background-color: rgba(0,0,0,0.1);
+    width: 100vw;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+    z-index: 999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.cscfe_info_pnl {
+    background-color: rgba(255,255,255);
+    border-radius: 4px;
+    padding: 10px;
+    overflow: auto;
+    color: #343a42;
+    font-family: Arial;
+    
+}
+
+.cscfe_info_pnl_header {
+    display: flex;
+    justify-content: center;
+    margin-bottom:6px;
+}
+
+.cscfe_info_pnl_header_title {
+    flex: 1;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.cscfe_info_pnl_closeBtn {
+    color: #30b7e8;
+    cursor: pointer;
+}
+
+.cscfe_info_pnl_closeBtn:hover {
+    color: #FF9100;
+
+}
+
+/* entry */
+.cscfe_info_pnl_entry {
+    margin: 10px 0px 0px 0px; 
+    padding:6px;
+    border-radius: 2px;
+    background-color: #ffffff; 
+    overflow: auto; 
+}
+
+.cscfe_info_pnl_entry:hover {
+    background-color: rgba(0,0,0,0.1); 
+    cursor: pointer;
+}
+
+.cscfe_info_pnl_entry_label {
+    font-size: 14px;
+    margin-bottom:4px;
+}
+
+.cscfe_info_pnl_entry_description {
+    font-size: 10px;
+}
+
+/* HEADERS */
+.headerOne {
+    font-weight: bold;
+    font-size: 30px !important; 
+}
+
+.headerTwo {
+    font-weight: bold;
+    font-size: 22px !important; 
+}
+
+.headerThree {
+    font-weight: bold;
+    font-size: 18px !important; 
+
+}
+
+
+/* SUP/SUB-SCRIPTS */
+
+.scplSub, .scplSup {
+  /* Specified in % so that the sup/sup is the
+     right size relative to the surrounding text */
+  font-size: 75% !important;
+
+  /* Zero out the line-height so that it doesn't
+     interfere with the positioning that follows */
+  line-height: 0 !important;
+
+  /* Where the magic happens: makes all browsers position
+     the sup/sup properly, relative to the surrounding text */
+  position: relative !important;
+
+  /* Note that if you're using Eric Meyer's reset.css, this
+     is already set and you can remove this rule */
+  vertical-align: baseline !important;
+}
+
+.scplSup {
+  /* Move the superscripted text up */
+  top: -0.5em !important;
+}
+
+.scplSub {
+  /* Move the subscripted text down, but only
+     half as far down as the superscript moved up */
+  bottom: -0.25em !important;
+}
+
+
+/* MENTIONS */
+.plcm-mention {
+    background-color: #9ba5ab; /* 848f96 */
+    padding:0px 4px 0px 4px;
+    margin:0px;
+    border: 1px solid #9ba5ab;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    align-content: center;
+}
+
+.plcm-mention:hover {
+    border: 1px solid #30b7e8;
+    background-color: #30b7e8;
+}
+
+.plcm-mention-text:hover {
+    /* 428ff4 FF9100 30b7e8 color: #FF9100 !important;*/   
+    
+}
+
+
+.plcm-mention-icon {
+    margin: 1px 4px 0px 0px;
+    border-radius: 2px;
+}
+
+/* FILES PREVIEW */
+
+.plcm-pf-container {
+    padding: 10px 0px 10px 0px;
+}
+
+.plcm-pf-btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.plcm-pf-btn-close {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+    color: #666666;
+    padding: 4px 6px 4px 6px;
+    border: 1px solid #666666;
+    border-radius: 4px;
+    margin: 0px 4px 4px 0px;
+}
+
+.plcm-pf-btn-close-lbl {
+    padding-right: 2px;
+}
+
+/* STICKY NOTE */ 
+
+.commaStickyNote {
+    padding:14px;
+    border-radius: 6px;
+    width: 60%;
+    box-sizing: border-box;
+} 
+    
+
+/* used for concept proof (see sticky notes) */
+.commaStickyNoteFloating {
+    background-color: #ffefa1;
+    padding:20px;
+    width:400px;
+    border-radius: 6px;
+    position: absolute;
+    top:10px;
+    right: 20px;
+}
+
+
+/* COMMENTs ....only for testing */
+.commentHighlight {
+    background-color: #b5e6da !important; 
+    padding:1px 0px 1px 0px;
+    margin:0px;
+}
+

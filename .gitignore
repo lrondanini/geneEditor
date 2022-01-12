@@ -1,0 +1,9 @@
+
+# Dependency directories
+node_modules/
+
+#vs code
+.vscode
+
+#clean MAC files
+.DS_Store
